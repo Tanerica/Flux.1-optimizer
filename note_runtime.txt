@@ -1,0 +1,23 @@
+---- TORCHAO-----------
+Normal:  7.342362999916077 - 31.419 GB
+Only torchao int8 : Time:  {8.45339322090149}
+autoquant int8 : {16.469473838806152}
+torchao int8+ torch.compile {5.8786585330963135}
+torch.compile 5.506230354309082
+----QUANTO-------
+qfloat8 --> Time:  {12.05727505683899}
+RuntimeError: A is not contiguous if quantize vae
+quanto with qfloat8 --> failed images
+quanto with qint4 --> {33.56596755981445} --> need more CPU, time to quantize
+Integrate with torch.compile 
+ERROR: torch._dynamo.exc.TorchRuntimeError: Failed running call_function <built-in function scaled_dot_product_attention>(*(FakeTensor(..., device='cuda:0', size=(1, 24, 4352, 128), dtype=torch.bfloat16), FakeTensor(..., device='cuda:0', size=(1, 24, 4352, 128), dtype=torch.bfloat16), FakeTensor(..., device='cuda:0', size=(1, 24, 4352, 128))), **{'dropout_p': 0.0, 'is_causal': False}):
+Expected query, key, and value to have the same dtype, but got query.dtype: c10::BFloat16 key.dtype: c10::BFloat16 and value.dtype: float instead
+------------BIT&BYTE----------------
+Normal: 8bit + fp16 {8.727126598358154}
+Normal: 8bit + bf16 {9.751208066940308}
+Not work with torch.compile
+------------NF4-----------
+Normal: {7.640856742858887}
+Not work with torch.compile
+------------AoT compile------------
+bug :)))
