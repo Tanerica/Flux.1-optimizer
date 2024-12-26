@@ -1,0 +1,8 @@
+torch
+torchao
+diffusers
+transformers
+accelerate
+sentencepiece
+protobuf
+xgboost
